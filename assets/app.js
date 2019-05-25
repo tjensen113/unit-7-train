@@ -25,27 +25,68 @@ $(document).ready(function(){
 
 //Initializing the variables .....................
 
-var database = firebase.database().
+var database = firebase.database();
 
 
-var trainName = "",
-var train
+var trainName = "";
+var trainDestination ="";
+var trainFrequency =0;
+var trainTime = "";
+var clickCounter = 1;
 //Capturing the add train button click.................
 
 
+$("#add-train").on("click",function(event){
+  event.preventDefault();
+  if ($('#train-input').val(),$("#destination-input").val(),$("#time-input").val(),$("#frequency-input").val() === ""){
+    alert("all fields required. SUCKA.");
+  } else{
+    //Declarethe variables that will hold the user input values..............................
+    trainName = $("#train-input").val().trim();
+    trainDestination = $("#destination-input").val().trim();
+    trainTime = $("#time-input").trim().val();
+    trainFrequency = $("#frequency-input").val().trim();
+
+    console.log("input values");
+    console.log(trainName);
+    console.log(trainTime);
+    console.log(trainDestination);
+    console.log(trainFrequency);
 
 
- //Declarethe variables that will hold the user input values..............................
+     //Creating a local temporary object for holding train info
+
+     var trainDetail = {
+       name: trainName,
+       destination: trainDestination,
+       frequency: trainFrequency,
+       time: trainTime
+     };
+     //Upload the train data to the database.....
+     database.ref().push(trainDetail);
+
+        //Clearing all the values from the input area when the submit button is clicked.
+        $("#train-input").val("");
+        $("#destination-input").val("");
+        $("#time-input").val("");
+        $("#frequency-input").val("");
+
+  }
+});
 
 
-  //Creating a local temporary object for holding train info
 
 
-  //Upload the train data to the database.....
+ 
+
+
+ 
 
 
 
-   //Clearing all the values from the input area when the submit button is clicked.
+
+
+
 
 
 
