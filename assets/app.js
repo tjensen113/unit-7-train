@@ -73,28 +73,49 @@ $("#add-train").on("click",function(event){
 
   }
 });
-
-
-
-
- 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
    //Creating a firebase event for adding train to the database and a row to the html..........
+   database.ref().on("child_added",function(childSnapshot,prevChildKey){
+
+    //Store to a variable.......
+
+    var trainName = childSnapshot.val().name;
+    var trainDestination = childSnapshot.val().destination;
+    var trainTime = childSnapshot.val().time;
+    var trainFrequency = childSnapshot.val().frequency;
+
+    //Use moment.js to convert the first train arrival time to .......
+    var trainTimeConvert = moment(trainTime,"HH:mm"). subtract(1,"years");
+
+
+    var currentTime = moment();
+
+    var diffTime = moment().diff(trainTimeConvert, "minutes");
+    var remainder = diffTime % trainFrequency;
+
+
+    var timeRemain = trainFrequency - remainder;
+
+    var newTrainTime = moment().add(timeRemain, "minutes");
+    newTrainFormat = moment(newTrainTime).format("HH:mm");
+
+
+  //dynamicly creting rows in the table
+  var row = $(("tr class = 'tableRow'><td>" + trainNumber + "</td><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainTime + "</td><td>" + trainFrequency + "</td><td>" + newTrainFormat + "</td><td>" + timeRemain + "</td><td>"));
+
+    $(".tableBody").append(row);
+
+    } );
+
+
+   });
+
+
+
+
+ 
+
+
+ 
 
 
 
@@ -102,12 +123,6 @@ $("#add-train").on("click",function(event){
 
 
 
-     //Store to a variable.......
-
-
-
-
-      //Use moment.js to convert the first train arrival time to .......
 
 
 
@@ -115,16 +130,26 @@ $("#add-train").on("click",function(event){
 
 
 
-       //Use moment.js to show current time......
 
 
 
 
-       //Declaring a variable that will hold the dynamically created rows and table data elements with its values....
 
 
 
-        //Appending the row to the table body..
+     
+
+
+
+
+      
+
+
+
+
+
+
+       
 
 
 
