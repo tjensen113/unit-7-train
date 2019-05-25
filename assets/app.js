@@ -1,17 +1,35 @@
 $(document).ready(function(){
 
  // Initialize Firebase
-var config={
+ 
+/* <script src="https://www.gstatic.com/firebasejs/6.0.3/firebase-app.js"></script> */
 
-}
 
-var database = firebase.database();
+
+
+   var firebaseConfig = {
+    apiKey: "AIzaSyBVJOfGfOxDvl65Y9ULYnqwB5VfLO517_I",
+    authDomain: "train-week7.firebaseapp.com",
+    databaseURL: "https://train-week7.firebaseio.com",
+    projectId: "train-week7",
+    storageBucket: "train-week7.appspot.com",
+    messagingSenderId: "694263318596",
+    appId: "1:694263318596:web:8614cbeef99837c1"
+    };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+
+
 
 //Initializing the variables .....................
 
+var database = firebase.database().
 
 
-
+var trainName = "",
+var train
 //Capturing the add train button click.................
 
 
